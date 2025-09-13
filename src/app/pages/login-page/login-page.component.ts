@@ -9,6 +9,8 @@ import { InspectiaInputFormComponent } from '@components/inspectia-input-form/in
 import { InspectiaLogoContainerComponent } from '@components/inspectia-logo-container/inspectia-logo-container.component';
 import { InspectiaTextComponent } from '@components/inspectia-text/inspectia-text.component';
 import { modalTypes } from 'assets/Typescript-generalities/Types';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +21,8 @@ import { modalTypes } from 'assets/Typescript-generalities/Types';
     InspectiaInputFormComponent,
     InspectiaButtonComponent,
     FormsModule,
-    BasicModalComponent
+    BasicModalComponent,
+    ProgressSpinnerModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
@@ -28,9 +31,10 @@ export class LoginPageComponent {
 
   email: string = '';
   password: string = '';
-  typeModal: modalTypes = 'info'
-  showModal = false
-  currentMessageModal: modalTypes = "info"
+  typeModal: modalTypes = 'info';
+  showModal = false;
+  currentMessageModal: modalTypes = "info";
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -59,8 +63,13 @@ export class LoginPageComponent {
         email: this.email,
         password: this.password
       };
-
-      this.authService.login(credentials).subscribe({
+      
+      this.isLoading = true;
+      this.authService.login(credentials).pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }) 
+      ).subscribe({
         next: (response) => {
           this.router.navigate([`/principal`]);
         },

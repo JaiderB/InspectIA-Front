@@ -47,3 +47,54 @@ form app-inspectia-input-form {
 .options .second-option {
   margin-top: 0.7rem;
 }
+
+
+
+
+.card {
+  z-index: 4;
+  background: var(--inspectia-loading-background);
+  border: var(--card-border);
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.custom-spinner {
+  height: min-content;
+}
+
+::ng-deep .progress-spinner .p-progress-spinner-circle {
+  animation: custom-spinner-animation 5s linear infinite;
+}
+
+@keyframes custom-spinner-animation {
+  0% {
+    stroke: var(--p-progressspinner-color-one);
+  }
+
+  25% {
+    stroke: var(--p-progressspinner-color-two);
+  }
+
+  50% {
+    stroke: var(--p-progressspinner-color-three);
+  }
+
+  75% {
+    stroke: var(--p-progressspinner-color-four);
+  }
+
+  100% {
+    stroke: var(--p-progressspinner-color-one);
+  }
+}
+
+app-analysis-icon {
+  --chain-back-fill-color: var(--inspectia-primary-shadow);
+}

@@ -182,6 +182,15 @@ section {
   height: 28vh;
 }
 
+
+
+
+.table app-row-table:nth-child(even) {
+  --row-background-color: var(--inspectia-neutral-color-trans-25);
+}
+
+
+
 .card {
   z-index: 4;
   background: var(--inspectia-loading-background);
@@ -199,11 +208,6 @@ section {
 .custom-spinner {
   height: min-content;
 }
-
-.table app-row-table:nth-child(even) {
-  --row-background-color: var(--inspectia-neutral-color-trans-25);
-}
-
 
 ::ng-deep .progress-spinner .p-progress-spinner-circle {
   animation: custom-spinner-animation 5s linear infinite;
